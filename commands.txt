@@ -1,12 +1,14 @@
+#this is a simple command
 COMMAND:CMD
 cmd.exe
 
-COMMAND:Fechar Chrome
-taskkill /im chrome.exe
+COMMAND:Close Google Chrome
+taskkill /im chrome.exe /f
 
-#SEPARATOR
+#This is a separator
 COMMAND:-
 
-COMMAND:Iniciar Apache
-iisreset /stop
-net start Apache2.4
+#this is a multiple line command example
+COMMAND:Restart Service
+net stop myservice
+net start myservice
