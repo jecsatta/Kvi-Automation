@@ -15,7 +15,7 @@ Public Const C_Dbl_Click_Identifier    As String = "COMMAND_DBL_CLICK:"
 Public Const C_Lang_Identifier         As String = "APP_LANG:"
 
 
-Public Const C_File_Conf       As String = "\conf.txt"
+Public Const C_File_Conf       As String = "\config.txt"
 Public Const C_File_Commands   As String = "\commands.txt"
 
  
@@ -29,7 +29,7 @@ Private Sub Main()
     If App.PrevInstance Then Exit Sub
     App_Lang = "en-us"
     App_ExitCaption = "Exit"
-    App_Hint = "PC Cop"
+    App_Hint = "Kvisthor"
     App_CloseMenuCaption = "Close Menu"
     ReadLang
     ReadConfigurations

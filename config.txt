@@ -1,4 +1,4 @@
-APP_HINT:Guardinha do PC
-EXIT_CAPTION:Sair
-CLOSE_MENU_CAPTION:Fechar Menu
+APP_HINT:Kvisthor App
+EXIT_CAPTION:Exit
+CLOSE_MENU_CAPTION:Close Menu
 COMMAND_DBL_CLICK:taskkill /im Chrome.exe /f

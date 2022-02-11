@@ -9,6 +9,6 @@ taskkill /im chrome.exe /f
 COMMAND:-
 
 #this is a multiple line command example
-COMMAND:Restart Service
-net stop myservice
-net start myservice
+#COMMAND:Restart Service
+#net stop myservice
+#net start myservice
