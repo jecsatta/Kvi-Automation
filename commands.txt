@@ -1,0 +1,12 @@
+COMMAND:CMD
+cmd.exe
+
+COMMAND:Fechar Chrome
+taskkill /im chrome.exe
+
+#SEPARATOR
+COMMAND:-
+
+COMMAND:Iniciar Apache
+iisreset /stop
+net start Apache2.4

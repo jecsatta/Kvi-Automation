@@ -1,0 +1,3 @@
+COMMAND_ALREADY_EXISTS:Wrong Format! Command Already exists on line : 
+COMMAND_WITHOUT_NAME:Wrong Format! Command without name on line: 
+COMMAND_WITHOUT_PARENT:Wrong Format! Command without parent on line: 
