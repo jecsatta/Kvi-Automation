@@ -1,4 +1,5 @@
 APP_HINT:Kvisthor App
+APP_LANG:en-us
 EXIT_CAPTION:Exit
 CLOSE_MENU_CAPTION:Close Menu
 COMMAND_DBL_CLICK:taskkill /im Chrome.exe /f

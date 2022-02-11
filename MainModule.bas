@@ -31,8 +31,9 @@ Private Sub Main()
     App_ExitCaption = "Exit"
     App_Hint = "Kvisthor"
     App_CloseMenuCaption = "Close Menu"
-    ReadLang
     ReadConfigurations
+    ReadLang
+    
     ReadCommands
     Load frmSysTray
 End Sub
@@ -121,6 +122,8 @@ Private Sub ReadConfigurations()
             ElseIf Left(vText, Len(C_Dbl_Click_Identifier)) = C_Dbl_Click_Identifier Then
                 vCountDblClickCommands = vCountDblClickCommands + 1
                 listCommandsDblClick.Add vCountDblClickCommands, Trim(Replace(vText, C_Dbl_Click_Identifier, ""))
+            ElseIf Left(vText, Len(C_Lang_Identifier)) = C_Lang_Identifier Then
+                App_Lang = Trim(Replace(vText, C_Lang_Identifier, ""))
             End If
         End If
     Loop
