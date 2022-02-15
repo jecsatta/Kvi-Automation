@@ -1,3 +1,5 @@
 COMMAND_ALREADY_EXISTS:Arquivo em formato incorreto! Comando duplicado na linha: 
 COMMAND_WITHOUT_NAME:Arquivo em formato incorreto! Comando encontrado sem nome na linha: 
 COMMAND_WITHOUT_FATHER:Arquivo em formato incorreto! Um comando foi encontrado sem pai na linha: 
+EXIT:Sair
+CLOSE_MENU:Fechar Menu

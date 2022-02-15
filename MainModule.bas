@@ -28,11 +28,13 @@ Public App_Lang As String
 Private Sub Main()
     If App.PrevInstance Then Exit Sub
     App_Lang = "en-us"
-    App_ExitCaption = "Exit"
-    App_Hint = "Kvisthor"
-    App_CloseMenuCaption = "Close Menu"
     ReadConfigurations
     ReadLang
+    
+    App_Hint = "Kvisthor"
+    App_ExitCaption = listStrings.Item("EXIT")
+    App_CloseMenuCaption = listStrings.Item("CLOSE_MENU")
+
     
     ReadCommands
     Load frmSysTray
