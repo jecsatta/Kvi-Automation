@@ -1,5 +1,8 @@
 # Kvisthor
 Little Program to automate simple tasks on Microsoft Windows
+
+![Menu](https://user-images.githubusercontent.com/60496134/154112016-cc0a8f0d-f781-4d9c-a0c5-bc68f8ea7aaa.png)
+
 There are two configuration files: commands.txt and config.txt.
 
 The commands.txt file contains the name of each task:
@@ -27,3 +30,4 @@ COMMAND_DBL_CLICK:taskkill /im program.exe /f
 COMMAND_DBL_CLICK:taskkill /im program2.exe /f
 ```
 Limitations: Only Command prompt commands are supported.
+
