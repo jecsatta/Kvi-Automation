@@ -61,7 +61,11 @@ Private Sub LoadMenu()
     i = 0
     For Each elem In listCommands.Keys
        Load mnuPopup(i)
-       mnuPopup(i).Caption = "" & elem
+       If Left(elem, 9) = "Separator" Then
+        mnuPopup(i).Caption = "-"
+       Else
+        mnuPopup(i).Caption = "" & elem
+       End If
        i = i + 1
     Next
 End Sub
@@ -94,7 +98,9 @@ End Sub
 Private Sub mnuPopup_Click(Index As Integer)
     Dim elem    As Variant
     Dim vPrefix As String
+    
     If Me.mnuPopup(Index).Caption = App_ExitCaption Then
+        Unload frmKVI
         Unload Me
     Else
         If Not listCommands.Exists(Me.mnuPopup(Index).Caption) Then Exit Sub
@@ -107,6 +113,7 @@ Private Sub mnuPopup_Click(Index As Integer)
     End If
 End Sub
 
+
 Private Sub SysTray_DoubleClick()
     Dim elem As Variant
     Dim i As Integer
@@ -114,6 +121,10 @@ Private Sub SysTray_DoubleClick()
     For Each elem In listCommandsDblClick.Items
         Shell "" & elem
     Next
+End Sub
+
+Private Sub SysTray_LeftClick()
+    frmKVI.Show
 End Sub
 
 Private Sub SysTray_RightClick()

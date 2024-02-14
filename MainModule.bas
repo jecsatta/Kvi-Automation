@@ -7,6 +7,8 @@ Public listCommandsDblClick As New Dictionary
 Public listStrings         As New Dictionary
 
 Const C_Command_Identifier      As String = "COMMAND:"
+Const C_Button_Identifier       As String = "BUTTON:"
+Const C_Button_Section          As String = "SECTION:"
 
 Public Const C_Hint_Identifier         As String = "APP_HINT:"
 Public Const C_Exit_Identifier         As String = "EXIT_CAPTION:"
@@ -17,6 +19,7 @@ Public Const C_Lang_Identifier         As String = "APP_LANG:"
 
 Public Const C_File_Conf       As String = "\config.txt"
 Public Const C_File_Commands   As String = "\commands.txt"
+Public Const C_File_Buttons    As String = "\buttons.txt"
 
  
 
@@ -32,16 +35,34 @@ Private Sub Main()
     ReadLang
     
     App_Hint = "Kvisthor"
-    App_ExitCaption = listStrings.Item("EXIT")
-    App_CloseMenuCaption = listStrings.Item("CLOSE_MENU")
+    App_ExitCaption = IIf(listStrings.Exists("EXIT"), listStrings.Item("EXIT"), App_ExitCaption)
+    App_CloseMenuCaption = IIf(listStrings.Exists("CLOSE_MENU"), listStrings.Item("CLOSE_MENU"), App_CloseMenuCaption)
 
     
     ReadCommands
     Load frmSysTray
 End Sub
 
+Public Sub ExecCommand(vPrefix As String)
+    Dim elem As Variant
+    For Each elem In listCommandsItems.Keys
+        If Left("" & elem, Len(vPrefix) + 1) = vPrefix & "_" Then
+            Shell listCommandsItems.Item(elem), vbNormalFocus
+        End If
+    Next
+    Unload frmKVI
+End Sub
+Public Function FilterDictionaryByKey(originalDict As Dictionary, searchString As String) As Dictionary
+    Dim filteredDict As New Dictionary
+    Dim currKey As Variant
+    For Each currKey In originalDict.Keys
+        If InStr(1, UCase(currKey), UCase(searchString)) > 0 Then
+            filteredDict.Add currKey, originalDict(currKey)
+        End If
+    Next currKey
 
-
+    Set FilterDictionaryByKey = filteredDict
+End Function
 Private Sub ReadLang()
     Dim vector() As String
     Dim vText As String
@@ -59,6 +80,7 @@ Private Sub ReadCommands()
 
     Dim vCountCommands   As Long
     Dim vCountCommandItems As Long
+    Dim vCountSeparator    As Long
     Dim vLineNumber As Long
     Dim vText      As String
     Dim vCommandName As String
@@ -75,6 +97,11 @@ Private Sub ReadCommands()
             If Left(vText, Len(C_Command_Identifier)) = C_Command_Identifier Then
                 vCommandName = Trim(Replace(vText, C_Command_Identifier, ""))
                 If vCommandName <> "" Then
+                    If vCommandName = "-" Then
+                        vCountSeparator = vCountSeparator + 1
+                        vCommandName = "Separator" & vCountSeparator
+                    End If
+                    
                     If Not listCommands.Exists(vCommandName) Then
                         vCountCommands = vCountCommands + 1
                         listCommands.Add vCommandName, vCountCommands

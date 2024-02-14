@@ -4,6 +4,7 @@ Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#..\..\Windows\SysWOW64
 Form=frmSysTray.frm
 Class=clsSysTray; clsSysTray.cls
 Module=MainModule; MainModule.bas
+Form=frmKVI.frm
 IconForm="frmSysTray"
 Startup="Sub Main"
 HelpFile=""

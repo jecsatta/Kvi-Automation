@@ -1,14 +1,40 @@
+COMMAND:Baixar Drive
+"C:\Fontes\BaixarDrive\BaixarDrive\bin\Release\BaixarDrive.exe"
+
+COMMAND:Gerador Versao
+"C:\Fontes\MaxSystemPostoNET\GeradorVersao\bin\Release\GeradorVersao.exe"
+
+COMMAND:MSP VB Tools
+"C:\Fontes\MSP VB Tools\MSP VB Tools.exe"
+
+COMMAND:Git Bash
+"C:\Program Files\Git\git-bash.exe"
 #this is a simple command
-COMMAND:CMD
+COMMAND:Prompt de Comando
 cmd.exe
 
-COMMAND:Close Google Chrome
-taskkill /im chrome.exe /f
 
 #This is a separator
 COMMAND:-
 
-#this is a multiple line command example
-#COMMAND:Restart Service
-#net stop myservice
-#net start myservice
+COMMAND:Iniciar Apache
+iisreset /stop
+net start Apache2.4
+
+#This is a separator
+COMMAND:-
+
+COMMAND:Abrir Compartilhado
+explorer.exe \\servidor\Compartilhado
+
+COMMAND:PDV (pasta)
+explorer.exe C:\Fontes\PDV
+
+COMMAND:Pasta (pasta)
+explorer.exe C:\Fontes\posto
+
+COMMAND:Monitor (pasta)
+explorer.exe C:\Fontes\MaxSystemPostoNET\GlobalMonitorSAT\bin\Debug
+
+COMMAND:Fechar Chrome
+taskkill /im chrome.exe /f
