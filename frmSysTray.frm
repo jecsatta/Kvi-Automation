@@ -29,7 +29,7 @@ Begin VB.Form frmSysTray
    End
    Begin VB.Timer tmr 
       Enabled         =   0   'False
-      Interval        =   200
+      Interval        =   1000
       Left            =   240
       Top             =   120
    End
@@ -55,6 +55,8 @@ Option Explicit
 
 Private WithEvents SysTray As clsSysTray
 Attribute SysTray.VB_VarHelpID = -1
+Dim executouDouble As Boolean
+
 Private Sub LoadMenu()
     Dim elem As Variant
     Dim i As Integer
@@ -81,6 +83,7 @@ Private Sub Form_Load()
     Me.Hide
     
     SysTray.Init Me, App_Hint
+    executouDouble = False
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -118,16 +121,28 @@ Private Sub SysTray_DoubleClick()
     Dim elem As Variant
     Dim i As Integer
     i = 0
+    executouDouble = True
     For Each elem In listCommandsDblClick.Items
         Shell "" & elem
     Next
+    
 End Sub
 
 Private Sub SysTray_LeftClick()
-    frmKVI.Show
+    If tmr.Enabled Then Exit Sub
+    tmr.Enabled = True
+    executouDouble = False
 End Sub
 
 Private Sub SysTray_RightClick()
     PopupMenu Me.mnuSysTray
 End Sub
 
+
+Private Sub tmr_Timer()
+    tmr.Enabled = False
+    tmr.Interval = 300
+    If Not executouDouble Then
+        frmKVI.Show
+    End If
+End Sub

@@ -86,6 +86,12 @@ Private Sub Fill_List(dict As Dictionary)
     Next currKey
 
 End Sub
+
+Private Sub List1_Click()
+    Me.Hide
+    ExecCommand listCommands.Item(List1.List(List1.ListIndex))
+End Sub
+
 Private Sub Text1_Change()
     Dim dict As Dictionary
     If Len(Trim(Text1.Text)) > 0 Then
