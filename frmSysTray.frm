@@ -2,17 +2,17 @@ VERSION 5.00
 Begin VB.Form frmSysTray 
    Appearance      =   0  'Flat
    Caption         =   "Hard Drive"
-   ClientHeight    =   690
+   ClientHeight    =   780
    ClientLeft      =   1425
    ClientTop       =   2295
-   ClientWidth     =   1575
+   ClientWidth     =   1650
    Icon            =   "frmSysTray.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   46
+   ScaleHeight     =   52
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   105
+   ScaleWidth      =   110
    ShowInTaskbar   =   0   'False
    Begin VB.PictureBox pic 
       AutoRedraw      =   -1  'True
@@ -37,10 +37,6 @@ Begin VB.Form frmSysTray
       Caption         =   "SysTray"
       Visible         =   0   'False
       Begin VB.Menu mnuPopup 
-         Caption         =   "Close Menu"
-         Index           =   998
-      End
-      Begin VB.Menu mnuPopup 
          Caption         =   "Exit"
          Index           =   999
       End
@@ -53,9 +49,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Declare Function SetForegroundWindow Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Const WM_NULL As Long = 0
+ 
 Private WithEvents SysTray As clsSysTray
 Attribute SysTray.VB_VarHelpID = -1
 Dim executouDouble As Boolean
+
 
 Private Sub LoadMenu()
     Dim elem As Variant
@@ -71,6 +72,7 @@ Private Sub LoadMenu()
        i = i + 1
     Next
 End Sub
+
 Private Sub Form_Load()
     Set SysTray = New clsSysTray
     Me.WindowState = vbMinimized
@@ -78,7 +80,6 @@ Private Sub Form_Load()
     DoEvents
    
     mnuPopup(999).Caption = App_ExitCaption
-    mnuPopup(998).Caption = App_CloseMenuCaption
     LoadMenu
     Me.Hide
     
@@ -86,15 +87,19 @@ Private Sub Form_Load()
     executouDouble = False
 End Sub
 
+Private Sub Form_LostFocus()
+    Me.mnuSysTray.Visible = False
+End Sub
+
 Private Sub Form_Unload(Cancel As Integer)
     Set SysTray = Nothing
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     SysTray.MouseMove Button, X, Me
 End Sub
 
-Private Sub pic_MouseMove(Button As Integer, Shift As Integer, X As Single, y As Single)
+Private Sub pic_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     SysTray.MouseMove Button, X, Me
 End Sub
 
@@ -135,9 +140,10 @@ Private Sub SysTray_LeftClick()
 End Sub
 
 Private Sub SysTray_RightClick()
+  SetForegroundWindow Me.hWnd
     PopupMenu Me.mnuSysTray
+    PostMessage Me.hWnd, WM_NULL, 0&, 0&
 End Sub
-
 
 Private Sub tmr_Timer()
     tmr.Enabled = False

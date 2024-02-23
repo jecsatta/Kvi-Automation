@@ -87,9 +87,24 @@ Private Sub Fill_List(dict As Dictionary)
 
 End Sub
 
-Private Sub List1_Click()
+Private Sub Click()
+
     Me.Hide
     ExecCommand listCommands.Item(List1.List(List1.ListIndex))
+    
+End Sub
+
+Private Sub List1_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyUp And List1.ListIndex = 0 Then
+        Text1.SetFocus
+    End If
+    If KeyCode = vbKeyReturn Then
+        Click
+    End If
+End Sub
+
+Private Sub List1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = 1 Then Click
 End Sub
 
 Private Sub Text1_Change()
@@ -100,6 +115,12 @@ Private Sub Text1_Change()
         Set dict = Nothing
     Else
         Fill_List listCommands
+    End If
+End Sub
+
+Private Sub Text1_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyDown Then
+        List1.SetFocus
     End If
 End Sub
 

@@ -12,7 +12,6 @@ Const C_Button_Section          As String = "SECTION:"
 
 Public Const C_Hint_Identifier         As String = "APP_HINT:"
 Public Const C_Exit_Identifier         As String = "EXIT_CAPTION:"
-Public Const C_CloseMenu_Identifier    As String = "CLOSE_MENU_CAPTION:"
 Public Const C_Dbl_Click_Identifier    As String = "COMMAND_DBL_CLICK:"
 Public Const C_Lang_Identifier         As String = "APP_LANG:"
 
@@ -24,7 +23,6 @@ Public Const C_File_Buttons    As String = "\buttons.txt"
  
 
 Public App_ExitCaption As String
-Public App_CloseMenuCaption As String
 Public App_Hint As String
 Public App_Lang As String
 
@@ -36,8 +34,6 @@ Private Sub Main()
     
     App_Hint = "Kvisthor"
     App_ExitCaption = IIf(listStrings.Exists("EXIT"), listStrings.Item("EXIT"), App_ExitCaption)
-    App_CloseMenuCaption = IIf(listStrings.Exists("CLOSE_MENU"), listStrings.Item("CLOSE_MENU"), App_CloseMenuCaption)
-
     
     ReadCommands
     Load frmSysTray
@@ -146,8 +142,6 @@ Private Sub ReadConfigurations()
                 App_Hint = Trim(Replace(vText, C_Hint_Identifier, ""))
             ElseIf Left(vText, Len(C_Exit_Identifier)) = C_Exit_Identifier Then
                 App_ExitCaption = Trim(Replace(vText, C_Exit_Identifier, ""))
-            ElseIf Left(vText, Len(C_CloseMenu_Identifier)) = C_CloseMenu_Identifier Then
-                App_CloseMenuCaption = Trim(Replace(vText, C_CloseMenu_Identifier, ""))
             ElseIf Left(vText, Len(C_Dbl_Click_Identifier)) = C_Dbl_Click_Identifier Then
                 vCountDblClickCommands = vCountDblClickCommands + 1
                 listCommandsDblClick.Add vCountDblClickCommands, Trim(Replace(vText, C_Dbl_Click_Identifier, ""))
